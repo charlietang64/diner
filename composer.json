@@ -1,0 +1,12 @@
+{
+  "name": "ctang/328/diner",
+  "authors": [
+    {
+      "name": "Charlie Tang",
+      "email": "tang.charlie@student.greenriver.edu"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}
