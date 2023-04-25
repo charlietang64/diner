@@ -47,7 +47,19 @@ $F3->route('GET /dinner', function () {
 });
 
 // Create a route "/order1" -> orderForm1.html
-$F3->route('GET /order1', function () {
+$F3->route('GET|POST /order1', function ($f3) {
+
+    // If the form has been posted
+    if($_SERVER['REQUEST_METHOD'] == "POST") {
+        // Get the data
+
+        // Validate the data
+
+        // Store the data in the session array
+
+        // Redirect to order2 route
+        $f3->reroute('order2');
+    }
 
     // Display a view page
     $view = new Template();
