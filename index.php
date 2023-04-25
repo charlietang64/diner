@@ -17,11 +17,57 @@ $F3 = Base::instance();
 
 // Define a default route
 $F3->route('GET /', function () {
-    //echo "<h1>Welcome to my Diner!</h1>";
-
     // Display a view page
     $view = new Template();
     echo $view->render('views/home.html');
+});
+
+// Define a breakfast route
+$F3->route('GET /breakfast', function () {
+
+    // Display a view page
+    $view = new Template();
+    echo $view->render('views/menus/breakfast.html');
+});
+
+// Define a lunch route
+$F3->route('GET /lunch', function () {
+
+    // Display a view page
+    $view = new Template();
+    echo $view->render('views/menus/lunch.html');
+});
+
+// Define a dinner route
+$F3->route('GET /dinner', function () {
+
+    // Display a view page
+    $view = new Template();
+    echo $view->render('views/menus/dinner.html');
+});
+
+// Create a route "/order1" -> orderForm1.html
+$F3->route('GET /order1', function () {
+
+    // Display a view page
+    $view = new Template();
+    echo $view->render('views/orderForm1.html');
+});
+
+// Create a route "/order2" -> orderForm2.html
+$F3->route('GET /order2', function () {
+
+    // Display a view page
+    $view = new Template();
+    echo $view->render('views/orderForm2.html');
+});
+
+// Create a route "/summary" -> summary.html
+$F3->route('GET /summary', function () {
+
+    // Display a view page
+    $view = new Template();
+    echo $view->render('views/summary.html');
 });
 
 // Run Fat-Free
