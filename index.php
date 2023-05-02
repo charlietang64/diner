@@ -46,16 +46,30 @@ $F3->route('GET /dinner', function () {
     echo $view->render('views/menus/dinner.html');
 });
 
+$F3->route('GET /happy-hour', function () {
+    // Display a view page
+    $view = new Template();
+    echo $view->render('views/menus/happyHour.html');
+});
+
 // Create a route "/order1" -> orderForm1.html
 $F3->route('GET|POST /order1', function ($f3) {
 
     // If the form has been posted
+    // "Auto-Global" Arrays: $_SERVER, $_GET, $_POST
     if($_SERVER['REQUEST_METHOD'] == "POST") {
         // Get the data
+        //var_dump($_POST);
+        $food = $_POST['food'];
+        $meal = $_POST['meal'];
+        //echo("Food: $food, Meal: $meal");
 
         // Validate the data
 
         // Store the data in the session array
+        $f3->set('SESSION.food', $food);
+        $f3->set('SESSION.meal', $meal);
+        //$_SESSION['food'] = $food;
 
         // Redirect to order2 route
         $f3->reroute('order2');
@@ -67,7 +81,22 @@ $F3->route('GET|POST /order1', function ($f3) {
 });
 
 // Create a route "/order2" -> orderForm2.html
-$F3->route('GET /order2', function () {
+$F3->route('GET|POST /order2', function ($f3) {
+
+    if($_SERVER['REQUEST_METHOD'] == "POST") {
+
+    // Get the data
+    //var_dump($_POST);
+    $conds = implode(", ",$_POST['conds']);
+    //echo $conds;
+
+    // Store the data in the session array
+    $f3->set('SESSION.conds', $conds);
+
+    // Redirect to the summary route
+    $f3->reroute('summary');
+
+    }
 
     // Display a view page
     $view = new Template();
@@ -80,6 +109,8 @@ $F3->route('GET /summary', function () {
     // Display a view page
     $view = new Template();
     echo $view->render('views/summary.html');
+
+    session_destroy();
 });
 
 // Run Fat-Free
