@@ -24,10 +24,15 @@
                         name="meal"
                         id="{{ @meal }}"
                         value="{{ @meal }}"
-          > {{ @meal }}
+          > {{ ucfirst(@meal) }}
             </input>
           </label><br>
         </repeat>
+
+        <!-- Display error if there is one-->
+        <check if='{{isset{{ @errors["meal"}} }}'>
+          <span>{{ @errors["meal"] }}</span>
+        </check>
 
     <div class="col-xs-1 ">
       <button type="submit">Next >></button>

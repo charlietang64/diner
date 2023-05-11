@@ -13,7 +13,15 @@ error_reporting(E_ALL);
 // Require the needed files
 require_once('vendor/autoload.php');
 require_once('model/data-layer.php');
+require_once('model/validation.php');
 //var_dump(getMeals());
+
+//if (validateMeal('gam')){
+//    print ('valid');
+//}
+//else {
+//    print ('Not Valid');
+//}
 
 // create an F3 (Fat-Free Framework) object
 $F3 = Base::instance();
@@ -64,6 +72,8 @@ $F3->route('GET /test', function () {
 // Create a route "/order1" -> orderForm1.html
 $F3->route('GET|POST /order1', function ($f3) {
 
+    $food="";
+    $meal="";
     // If the form has been posted
     // "Auto-Global" Arrays: $_SERVER, $_GET, $_POST
     if($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -74,18 +84,25 @@ $F3->route('GET|POST /order1', function ($f3) {
         //echo("Food: $food, Meal: $meal");
 
         // Validate the data
+        if (validateMeal($meal)) {
+            $f3->set('SESSION.meal', $meal);
+        }
+        else {
+            $f3->set('errors["meal"]', 'Invalid meal Selected');
+        }
 
         // Store the data in the session array
         $f3->set('SESSION.food', $food);
-        $f3->set('SESSION.meal', $meal);
         //$_SESSION['food'] = $food;
 
         // Redirect to order2 route
-        $f3->reroute('order2');
+
+        if (empty($f3->get('errors'))) {
+            $f3->reroute('order2');
+        }
     }
 
-    $meal = getMeals();
-    $f3->set('meals', $meal);
+    $f3->set('meals', getMeals());
 
     // Display a view page
     $view = new Template();
@@ -109,6 +126,8 @@ $F3->route('GET|POST /order2', function ($f3) {
     $f3->reroute('summary');
 
     }
+
+    $f3->set('condiments', getCondiments());
 
     // Display a view page
     $view = new Template();
