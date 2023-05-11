@@ -10,7 +10,10 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+// Require the needed files
 require_once('vendor/autoload.php');
+require_once('model/data-layer.php');
+//var_dump(getMeals());
 
 // create an F3 (Fat-Free Framework) object
 $F3 = Base::instance();
@@ -52,6 +55,12 @@ $F3->route('GET /happy-hour', function () {
     echo $view->render('views/menus/happyHour.html');
 });
 
+$F3->route('GET /test', function () {
+    // Display a view page
+    $view = new Template();
+    echo $view->render('views/menus/test.html');
+});
+
 // Create a route "/order1" -> orderForm1.html
 $F3->route('GET|POST /order1', function ($f3) {
 
@@ -74,6 +83,9 @@ $F3->route('GET|POST /order1', function ($f3) {
         // Redirect to order2 route
         $f3->reroute('order2');
     }
+
+    $meal = getMeals();
+    $f3->set('meals', $meal);
 
     // Display a view page
     $view = new Template();
