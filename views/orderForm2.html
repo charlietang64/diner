@@ -13,9 +13,13 @@
           <label><input type="checkbox"
                         name="conds[]"
                         value="{{ @cond }}"
-          > {{ ucfirst(@cond) }}</label><br>
+          > {{ @cond }}</label><br>
         </repeat>
 
+        <!-- Display an error if there is one -->
+        <check if ="{{ isset(@errors['conds']) }}">
+          <span class="err">{{ @errors['conds'] }}</span>
+        </check>
       </div>
     </div>
 

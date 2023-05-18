@@ -10,7 +10,11 @@
       <label for="food" class="col-sm-4 control-label">What food would you like to order?</label>
 
       <div class="col-sm-4">
-        <input class="form-control" type="text" name="food" id="food" value="">
+        <input class="form-control" type="text" name="food" id="food" value="{{ @userFood }}">
+
+        <check if="{{ isset(@errors['food']) }}">
+          <span class="err">{{ @errors['food'] }}</span>
+        </check>
       </div>
     </div>
     <br>
@@ -24,15 +28,21 @@
                         name="meal"
                         id="{{ @meal }}"
                         value="{{ @meal }}"
+                        <check if="{{ @meal == @userMeal}}">
+                          checked=checked
+                        </check>
           > {{ ucfirst(@meal) }}
             </input>
           </label><br>
         </repeat>
 
-        <!-- Display error if there is one-->
-        <check if='{{isset{{ @errors["meal"}} }}'>
-          <span>{{ @errors["meal"] }}</span>
+        <!-- Display an error if there is one -->
+        <check if="{{ isset(@errors['meal']) }}">
+          <span class="err">{{ @errors['meal'] }}</span>
         </check>
+
+      </div>
+    </div>
 
     <div class="col-xs-1 ">
       <button type="submit">Next >></button>
