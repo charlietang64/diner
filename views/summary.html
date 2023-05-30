@@ -4,9 +4,10 @@
   <h1>Thank you for your order!</h1>
   <h2>Order Summary</h2>
   <p>Order details here...</p>
-  <p>You ordered {{ @SESSION.food }} for {{ @SESSION.meal }}</p>
-  <check if="{{ isset(@SESSION.condiments) }}">
-    <p>Condiments: {{ @SESSION.condiments }}</p>
+  <p>You ordered {{ @SESSION.order->getFood() }}
+    for {{ @SESSION.order->getMeal() }}</p>
+  <check if="{{ !empty(@SESSION.order->getCondiments()) }}">
+    <p>Condiments: {{ @SESSION.order->getCondiments() }}</p>
   </check>
 
   <a href="order1">Place another order</a>
