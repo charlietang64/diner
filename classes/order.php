@@ -11,7 +11,13 @@ class Order
 {
     private $_food;
     private $_meal;
-    private $_condiment;
+    private $_condiments;
+
+    //Add two more variables:
+    //meal and condiments
+    //Initialize in constructor
+    //Create setters and getters
+    //Test methods
 
     /**
      * Default constructor for Order
@@ -20,34 +26,16 @@ class Order
     {
         $this->_food = "";
         $this->_meal = "";
-        $this->_condiment = "";
+        $this->_condiments = "";
     }
 
     /**
      * Set food for order
      * @param string $food
      */
-    public function setFood($food)
+    public function setFood (string $food)
     {
         $this->_food = $food;
-    }
-
-    /**
-     * Set meal for order
-     * @param string $meal
-     */
-    public function setMeal($meal)
-    {
-        $this->_meal = $meal;
-    }
-
-    /**
-     * Set condiment for order
-     * @param string $condiment
-     */
-    public function setCondiments($condiment)
-    {
-        $this->_condiment = $condiment;
     }
 
     /**
@@ -60,7 +48,15 @@ class Order
     }
 
     /**
-     * Get meal for order
+     * Set meal for order
+     * @param string $meal
+     */
+    public function setMeal(string $meal)
+    {
+        $this->_meal = $meal;
+    }
+
+    /**
      * @return string
      */
     public function getMeal()
@@ -69,23 +65,42 @@ class Order
     }
 
     /**
-     * Get condiment for order
+     * Set condiments for order
+     * @param string $condiments
+     */
+    public function setCondiments(string $condiments)
+    {
+        $this->_condiments = $condiments;
+    }
+
+    /**
+     * Get condiments for order
      * @return string
      */
     public function getCondiments()
     {
-        return $this->_condiment;
+        return $this->_condiments;
+    }
+
+    //Useless method for demo purposes only!
+    public static function sayHello()
+    {
+        echo "Hello";
     }
 }
 
 /*
-$testOrder = new Order();
-$testOrder->setFood("beans");
-$testOrder->setMeal("brekky");
-$testOrder->setCondiment("ketchup");
-echo $testOrder->getFood();
-echo "<br>";
-echo $testOrder->getMeal();
-echo "<br>";
-echo $testOrder->getCondiment();
+//Test code
+$order = new Order();
+
+$order->setFood("pancakes");
+$order->setMeal("breakfast");
+$order->setCondiments("ketchup");
+
+echo $order->getFood();
+echo $order->getMeal();
+echo $order->getCondiments();
+echo "<pre>";
+var_dump($order);
+echo "</pre>";
 */

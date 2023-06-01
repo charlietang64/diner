@@ -14,6 +14,9 @@ error_reporting(E_ALL);
 // Require the needed files
 require_once('vendor/autoload.php');
 
+// *** Testing only ***
+$dataLayer = new DataLayer();
+
 // Create an F3 (Fat-Free Framework) object
 $f3 = Base::instance();
 $con = new Controller($f3);
