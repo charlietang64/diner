@@ -29,6 +29,52 @@ class DataLayer
         }
     }
 
+    /** saveOrder saves an order from the Diner
+     * @param Order An order object
+     * @return int The orderID for the new order
+     */
+    function saveOrder($order)
+    {
+        // Define the query
+        $sql = "INSERT INTO orders (food, meal, condiments)
+                VALUES (:food, :meal, :condiments)";
+
+        // Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        // Bind the parameters
+        $food = $order->getFood();
+        $meal = $order->getMeal();
+        $condiments = $order->getCondiments();
+
+        $statement->bindParam(':food', $food);
+        $statement->bindParam(':meal', $meal);
+        $statement->bindParam(':condiments', $condiments);
+
+        // Execute
+        $statement->execute();
+
+        // Return the primary key
+        $id = $this->_dbh->lastInsertId();
+        return $id;
+    }
+
+    function getOrders()
+    {
+        // Define the query
+        $sql = "SELECT order_id, food, meal, condiments, date_time FROM `orders`;";
+
+        // Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        // Execute
+        $statement->execute();
+
+        // Process the results
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     // Get the meals for the order1 form
     static function getMeals()
     {
